@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name:Brendan Cahill
+# OSU Email:cahillbr@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 4
+# Due Date: 5/22/23
+# Description: bst and avl
 
 
 import random
@@ -106,16 +106,17 @@ class BST:
     # ------------------------------------------------------------------ #
 
     def add(self, value: object) -> None:
+        """
+        Adds a value to the binary search tree.
+        """
         new_node = BSTNode(value)
 
-        # if tree is empty, set new_node as root
-        if not self._root:
+        if not self._root:  # If tree is empty, set new_node as root
             self._root = new_node
             return new_node
 
-        # traverse the tree to find the appropriate place to insert new_node
         curr_node = self._root
-        while True:
+        while True:  # Traverse the tree to find the appropriate place to insert new_node
             if value < curr_node.value:
                 if curr_node.left:
                     curr_node = curr_node.left
@@ -129,10 +130,9 @@ class BST:
                     curr_node.right = new_node
                     return new_node
 
-
     def remove(self, value: object) -> bool:
         """
-        Remove a value from the tree.
+        Remove a value from the binary search tree.
         Returns True if the value is removed, False otherwise.
         """
         node = self._root
@@ -144,10 +144,10 @@ class BST:
             else:
                 node = node.right
 
-        if not node:  # value not found in the tree
+        if not node:  # Value not found in the tree
             return False
 
-        # Case 1: node has no children
+        # Case 1: Node has no children
         if not node.left and not node.right:
             if node is self._root:
                 self._root = None
@@ -156,7 +156,7 @@ class BST:
             else:
                 parent.right = None
 
-        # Case 2: node has one child
+        # Case 2: Node has one child
         elif not node.left or not node.right:
             child = node.left or node.right
             if node is self._root:
@@ -166,7 +166,7 @@ class BST:
             else:
                 parent.right = child
 
-        # Case 3: node has two children
+        # Case 3: Node has two children
         else:
             # Find the minimum value in the right subtree
             min_node = node.right
@@ -188,13 +188,13 @@ class BST:
 
     def contains(self, value: object) -> bool:
         """
-        Return True if the value is in the tree, False otherwise
+        Return True if the value is in the binary search tree, False otherwise.
         """
         return self._contains_helper(self._root, value)
 
     def _contains_helper(self, node: BSTNode, value: object) -> bool:
         """
-        Recursive helper method for contains()
+        Recursive helper method for contains().
         """
         if node is None:
             return False
@@ -202,10 +202,13 @@ class BST:
             return True
         elif node.value > value:
             return self._contains_helper(node.left, value)
-        else:  # node.value < value
+        else:
             return self._contains_helper(node.right, value)
 
     def inorder_traversal(self) -> Queue:
+        """
+        Perform an inorder traversal of the binary search tree and return a queue of values.
+        """
         queue = Queue()
         stack = Stack()
         curr = self._root
@@ -220,7 +223,7 @@ class BST:
 
     def find_min(self) -> object:
         """
-        Return the minimum value in the tree, or None if empty
+        Return the minimum value in the binary search tree, or None if empty.
         """
         if not self._root:
             return None
@@ -228,7 +231,7 @@ class BST:
 
     def _find_min_helper(self, node: BSTNode) -> object:
         """
-        Recursive helper method to find minimum value in the tree
+        Recursive helper method to find the minimum value in the binary search tree.
         """
         if not node.left:
             return node.value
@@ -236,7 +239,7 @@ class BST:
 
     def find_max(self) -> object:
         """
-        Returns the highest value in the tree. If the tree is empty, the method should return None.
+        Return the highest value in the binary search tree, or None if empty.
         Implemented with O(N) runtime complexity.
         """
         if self._root is None:
@@ -249,9 +252,15 @@ class BST:
         return current_node.value
 
     def is_empty(self) -> bool:
+        """
+        Return True if the binary search tree is empty, False otherwise.
+        """
         return self._root is None
 
     def make_empty(self) -> None:
+        """
+        Make the binary search tree empty by setting the root to None.
+        """
         self._root = None
 
 
