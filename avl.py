@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name:Brendan Cahill
+# OSU Email:cahillbr@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 4
+# Due Date: 5/22/23
+# Description: bst and avl
 
 
 import random
